@@ -1,0 +1,15 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Login
+{% endblock titulo %}
+
+{% block conteudo %}
+<h1>Entrar na Conta</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Entrar</button>
+</form>
+<p>Não tem conta? <a href="{% url 'register' %}">Registrar-se</a></p>
+{% endblock conteudo %}

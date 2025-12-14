@@ -1,0 +1,14 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Adicionar Album
+{% endblock titulo %}
+
+{% block conteudo %}
+<h1>Adicionar Novo Álbum</h1>
+<form action="{% url 'postar' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit">Adicionar Álbum</button>
+</form>
+{% endblock conteudo %}

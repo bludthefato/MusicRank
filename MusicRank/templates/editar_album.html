@@ -1,0 +1,15 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Editar Album
+{% endblock titulo %}
+
+{% block conteudo %}
+<h1>Editar Álbum: {{ album.title }}</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit">Salvar Alterações</button>
+</form>
+<a href="{% url 'inicio' %}">Voltar</a>
+{% endblock conteudo %}

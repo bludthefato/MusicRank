@@ -1,0 +1,32 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Bem-vindo ao Album Evaluator
+{% endblock titulo %}
+
+{% block conteudo %}
+<div class="landing">
+    <h1>Bem-vindo ao Avaliador de Albuns</h1>
+    <p>Compartilhe suas opinioes sobre albuns musicais! Entre para comecar.</p>
+
+    <div class="auth-container">
+        <div class="login-form">
+            <h2>Entrar</h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% url 'inicio' %}">
+                <div>
+                    <label for="id_username">Usuario:</label>
+                    <input type="text" name="username" id="id_username" required>
+                </div>
+                <div>
+                    <label for="id_password">Senha:</label>
+                    <input type="password" name="password" id="id_password" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+            <p class="register-link">Ou <a href="{% url 'register' %}">registrar</a></p>
+        </div>
+    </div>
+</div>
+{% endblock conteudo %}

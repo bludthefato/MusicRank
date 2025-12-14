@@ -1,0 +1,24 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+{{ album.title }} - {{ album.artist }}
+{% endblock titulo %}
+
+{% block conteudo %}
+<div class="album-detail">
+    {% if album.image %}
+        <img src="{{ album.image.url }}" alt="{{ album.title }}" class="album-image">
+    {% endif %}
+    <h1>{{ album.title }}</h1>
+    <h2>{{ album.artist }}</h2>
+    <p class="review">{{ album.review }}</p>
+    <p class="author">Avaliado por: {{ album.user.username }}</p>
+    {% if user.is_authenticated and album.user == user %}
+        <div class="actions">
+            <a href="{% url 'editar_album' album.id %}">Editar</a>
+            <a href="{% url 'deletar_album' album.id %}">Deletar</a>
+        </div>
+    {% endif %}
+    <a href="{% url 'albums' %}">Voltar à Galeria</a>
+</div>
+{% endblock conteudo %}

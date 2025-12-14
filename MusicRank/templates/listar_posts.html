@@ -1,0 +1,18 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Postagens
+{% endblock titulo %}
+
+{% block conteudo %}
+{% include "cabecalho.html" %}
+<div id="todos_posts">
+{% for pp in postagens %}
+    <div class="postagem">
+        <h3>{{ pp.autor }}</h3>
+        <img src="/media/{{ pp.imagem }}"></img>
+        <p> {{ pp.mensagem }} </p>
+    </div>
+{% endfor %}
+</div>
+{% endblock conteudo %}

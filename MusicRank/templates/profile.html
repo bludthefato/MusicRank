@@ -1,0 +1,37 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Perfil de {{ user.username }}
+{% endblock titulo %}
+
+{% block conteudo %}
+<h1>Perfil de {{ user.username }}</h1>
+<div class="profile-info">
+    {% if user_profile.avatar %}
+        <img src="{{ user_profile.avatar.url }}" alt="Avatar" class="avatar">
+    {% else %}
+        <div class="avatar-placeholder">{{ user.username|first|upper }}</div>
+    {% endif %}
+    <p><strong>Nome de usuário:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Data de registro:</strong> {{ user.date_joined|date:"d/m/Y" }}</p>
+</div>
+
+<h2>Meus Álbuns ({{ user_albums.count }})</h2>
+{% for album in user_albums %}
+    <div class="album">
+        {% if album.image %}
+            <a href="{% url 'album_detail' album.id %}"><img src="{{ album.image.url }}" alt="{{ album.title }}"></a>
+        {% endif %}
+        <div>
+            <a href="{% url 'album_detail' album.id %}"><h2>{{ album.title }}</h2></a>
+            <h3>{{ album.artist }}</h3>
+            <p>{{ album.review|truncatechars:100 }}</p>
+            <a href="{% url 'editar_album' album.id %}">Editar</a>
+            <a href="{% url 'deletar_album' album.id %}">Deletar</a>
+        </div>
+    </div>
+{% empty %}
+    <p>Você ainda não adicionou nenhum álbum. <a href="{% url 'postar' %}">Adicionar primeiro álbum</a></p>
+{% endfor %}
+{% endblock conteudo %}

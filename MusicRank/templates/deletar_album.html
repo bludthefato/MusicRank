@@ -1,0 +1,15 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Deletar Album
+{% endblock titulo %}
+
+{% block conteudo %}
+<h1>Deletar Álbum: {{ album.title }}</h1>
+<p>Tem certeza que deseja deletar este álbum? Esta ação não pode ser desfeita.</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #dc3545;">Sim, deletar</button>
+</form>
+<a href="{% url 'inicio' %}" style="display: inline-block; margin-top: 10px; color: #007bff;">Cancelar</a>
+{% endblock conteudo %}

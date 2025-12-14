@@ -1,0 +1,15 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Controle
+{% endblock titulo %}
+
+
+{% block conteudo %}
+{% include "cabecalho.html" %}
+<ul>
+    {% for ii in variavel %}
+    <li>{{ii}}</li>
+    {% endfor %}
+</ul>
+{% endblock conteudo %}

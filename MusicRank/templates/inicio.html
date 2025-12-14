@@ -1,0 +1,32 @@
+{% extends "mestre.html" %}
+
+{% block titulo %}
+Album Evaluator
+{% endblock titulo %}
+
+{% block conteudo %}
+<h1>Bem-vindo ao Avaliador de Álbuns</h1>
+<p>Compartilhe suas opiniões sobre álbuns musicais! Adicione fotos e escreva reviews.</p>
+<p><a href="{% url 'albums' %}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Ver Galeria de Álbuns</a></p>
+{% if albums %}
+    <h2>Álbuns Recentes</h2>
+    {% for album in albums|slice:":3" %}  {# Show only first 3 #}
+        <div class="album">
+            {% if album.image %}
+                <a href="{% url 'album_detail' album.id %}"><img src="{{ album.image.url }}" alt="{{ album.title }}"></a>
+            {% endif %}
+            <div>
+                <a href="{% url 'album_detail' album.id %}"><h2>{{ album.title }}</h2></a>
+                <h3>{{ album.artist }}</h3>
+                <p>{{ album.review|truncatechars:100 }}</p>
+                <p><strong>Por: {{ album.user.username }}</strong></p>
+                {% if user.is_authenticated and album.user == user %}
+                    <a href="{% url 'editar_album' album.id %}">Editar</a>
+                    <a href="{% url 'deletar_album' album.id %}">Deletar</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    <p><a href="{% url 'albums' %}">Ver todos os álbuns</a></p>
+{% endif %}
+{% endblock conteudo %}
